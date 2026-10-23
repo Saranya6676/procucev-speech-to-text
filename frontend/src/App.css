@@ -1,0 +1,307 @@
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, Arial, sans-serif;
+  color: #1f2937;
+  background: #f5f7fb;
+  font-synthesis: none;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.app {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  padding: 36px 24px 60px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+h1 {
+  margin: 8px 0;
+  font-size: clamp(26px, 4vw, 36px);
+}
+
+.subtitle,
+.section-heading p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.record-count {
+  min-width: 125px;
+  padding: 18px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.record-count span {
+  display: block;
+  color: #4f46e5;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.record-count small {
+  color: #6b7280;
+}
+
+.panel {
+  padding: 26px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(31, 41, 55, 0.04);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: 21px;
+}
+
+.section-heading p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  color: #1f2937;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form-actions,
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.primary-button,
+.secondary-button,
+.delete-button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.primary-button {
+  color: white;
+  background: #4f46e5;
+  border: 1px solid #4f46e5;
+}
+
+.primary-button:hover {
+  background: #4338ca;
+}
+
+.secondary-button {
+  color: #374151;
+  background: white;
+  border: 1px solid #d1d5db;
+}
+
+.secondary-button:hover {
+  background: #f9fafb;
+}
+
+.delete-button {
+  color: #b91c1c;
+  background: white;
+  border: 1px solid #fecaca;
+}
+
+.delete-button:hover {
+  background: #fef2f2;
+}
+
+.alert {
+  padding: 13px 16px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.error {
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.success {
+  color: #166534;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.records-section {
+  margin-top: 36px;
+}
+
+.records-heading {
+  margin-bottom: 18px;
+}
+
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.transcription-card {
+  min-width: 0;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-badge {
+  padding: 5px 9px;
+  color: #4338ca;
+  background: #eef2ff;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.record-id,
+.record-date {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.transcription-card h3 {
+  margin: 16px 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.transcript-text {
+  color: #4b5563;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.record-date {
+  margin: 16px 0;
+}
+
+.empty-state {
+  padding: 38px 20px;
+  color: #6b7280;
+  background: white;
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.empty-state h3 {
+  color: #374151;
+}
+
+@media (max-width: 650px) {
+  .app {
+    padding: 24px 16px 40px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .record-count {
+    width: 100%;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .records-grid {
+    grid-template-columns: 1fr;
+  }
+}
