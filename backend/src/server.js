@@ -119,7 +119,55 @@ app.delete("/api/transcriptions/:id", (req, res) => {
       res.json({ message: "Transcription deleted successfully" });
     }
   );
+}); 
+
+
+ // Create a short-lived Gemini token for the frontend
+app.post("/api/gemini/token", async (req, res) => {
+  if (!process.env.GEMINI_API_KEY) {
+    return res.status(500).json({
+      message: "Gemini API key is not configured",
+    });
+  }
+
+  try {
+    const { GoogleGenAI } = await import("@google/genai");
+
+    const ai = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+    });
+
+    const token = await ai.authTokens.create({
+      config: {
+        uses: 1,
+        expireTime: new Date(
+          Date.now() + 30 * 60 * 1000
+        ).toISOString(),
+        newSessionExpireTime: new Date(
+          Date.now() + 60 * 1000
+        ).toISOString(),
+        liveConnectConstraints: {
+          model: "gemini-3.5-transcribe-live",
+          config: {
+            responseModalities: ["TEXT"],
+            inputAudioTranscription: {
+              languageCodes: [],
+            },
+          },
+        },
+      },
+    });
+
+    res.json({ token: token.name });
+  } catch (error) {
+    console.error("Gemini token error:", error.message);
+
+    res.status(500).json({
+      message: "Could not create Gemini session token",
+    });
+  }
 });
+
 
 // Handle unknown routes
 app.use((req, res) => {

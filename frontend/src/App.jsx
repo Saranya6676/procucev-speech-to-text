@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-import './App.css' 
-import axios from "axios"; 
+import './App.css'
+import axios from "axios";
 import SpeechRecorder from "./components/SpeechRecorder";
 
 
@@ -13,7 +13,7 @@ const speechLanguageCodes = {
   Kannada: "kn-IN",
   Telugu: "te-IN",
   Other: "en-IN",
-}; 
+};
 
 const API_URL = "http://localhost:5000/api/transcriptions";
 
@@ -38,7 +38,7 @@ function App() {
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          "Cannot connect to the backend. Check whether it is running."
+        "Cannot connect to the backend. Check whether it is running."
       );
     } finally {
       setLoading(false);
@@ -56,11 +56,16 @@ function App() {
     setTranscript("");
     setLanguage("English");
     setEditingId(null);
+
   };
+
+
 
   // Add a new transcription or update an existing one
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setMessage("");
 
     if (!transcript.trim()) {
       setError("Please enter transcription text.");
@@ -69,8 +74,7 @@ function App() {
 
     try {
       setSaving(true);
-      setError("");
-      setMessage("");
+
 
       const payload = {
         title: title.trim() || "Untitled transcription",
@@ -85,14 +89,16 @@ function App() {
         await axios.post(API_URL, payload);
         setMessage("Transcription saved successfully!");
       }
-
+      setTimeout(() => {
+        setMessage("");
+      }, 4000);
       resetForm();
       await fetchTranscriptions();
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Unable to save transcription."
+        err.response?.data?.error ||
+        "Unable to save transcription."
       );
     } finally {
       setSaving(false);
@@ -133,8 +139,8 @@ function App() {
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Unable to delete transcription."
+        err.response?.data?.error ||
+        "Unable to delete transcription."
       );
     }
   };
@@ -145,11 +151,9 @@ function App() {
         <div>
           <p className="eyebrow">TRANSCRIPTION WORKSPACE</p>
           <h1>Speech-to-Text Dashboard</h1>
-          <p className="subtitle">
-            Save, organize, edit, and manage your transcriptions.
-          </p>
-        </div> 
-       
+          
+        </div>
+
 
         <div className="record-count">
           <span>{transcriptions.length}</span>
@@ -208,17 +212,17 @@ function App() {
               <option value="Telugu">Telugu</option>
               <option value="Other">Other</option>
             </select>
-          </div> 
+          </div>
           <div className="form-group">
-  <label>Live speech transcription</label>
+            <label>Live speech transcription</label>
 
- 
-  <SpeechRecorder
-    language={speechLanguageCodes[language] || "en-IN"}
-    initialTranscript={transcript}
-    onTranscriptChange={setTranscript}
-  />
-</div>
+
+            <SpeechRecorder
+              language={speechLanguageCodes[language] || "en-IN"}
+              initialTranscript={transcript}
+              onTranscriptChange={setTranscript}
+            />
+          </div>
 
           <div className="form-group">
             <label htmlFor="transcript">Transcription text</label>
